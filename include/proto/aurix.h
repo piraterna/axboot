@@ -67,6 +67,7 @@ struct aurix_module {
 };
 
 struct aurix_parameters {
+	char signature[2]; // AX\x53
 	// PROTOCOL INFO
 	uint8_t revision;
 
