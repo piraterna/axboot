@@ -24,6 +24,7 @@
 #define _AURIX_H
 
 #include <stdint.h>
+#include <stddef.h>
 
 /* Aurix Boot Protocol (revision 1-dev) */
 #define AURIX_PROTOCOL_REVISION 1
