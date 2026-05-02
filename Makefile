@@ -19,7 +19,7 @@
 
 .DEFAULT_GOAL := all
 
-export ROOT_DIR ?= $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+export ROOT_DIR := $(if $(ROOT_DIR),$(ROOT_DIR),$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 
 export ARCH ?= x86_64
 export PLATFORM ?= uefi
@@ -28,7 +28,7 @@ export BUILD_TYPE ?= debug
 export BUILD_DIR ?= $(ROOT_DIR)/build
 export SYSROOT_DIR ?= $(ROOT_DIR)/sysroot
 
-export BOOT_ROOT := $(ROOT_DIR)
+export BOOT_ROOT := $(if $(BOOT_ROOT),$(BOOT_ROOT),$(ROOT_DIR))
 
 export INCLUDE_DIRS := $(BOOT_ROOT)/include \
 					   $(BOOT_ROOT)/include/arch/$(ARCH) \
@@ -44,6 +44,8 @@ export LDFLAGS := -nostdlib
 export NOUEFI ?= n
 
 include arch/$(ARCH)/config.mk
+
+$(info $(ROOT_DIR))
 
 ifeq ($(BUILD_TYPE),debug)
 CFLAGS += -O0 -g3
